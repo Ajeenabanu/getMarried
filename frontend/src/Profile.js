@@ -2,24 +2,29 @@ import "./style.css"
 import img from "./image/img.svg"
 import logout from "./image/logout.png"
 import logout1 from "./image/logout1.webp"
+import { useNavigate } from "react-router-dom";
 export default function Profile() {
-    return <>
+    const navi = useNavigate();
+
+    function logoutin() {
+        localStorage.clear();
+        navi("/");
+      }
+    return <p>
         <div className="profile_head">
-            <img src={img}></img>
-            <label> MY HOME </label>
-            <label> SEARCH </label>
-            <label> MATCHES </label>
-            <label> MAILBOX </label>
-            <label> UPGRADE NOW </label>
+            <img  alt="" src={img}></img>
+            <a href="/Home"> MY HOME </a>
+            <a href="/Search"> SEARCH </a>
             <div className="profile_head_1">
-                <img src={logout} />
+                <img  onClick={logoutin}  alt="" src={logout} />
+                <p className="tooltip">LogOut</p>
             </div>
         </div>
 
         <div className="profile_body">
             <div className="profile_body_2">
                 <div className="profile_body_3">
-                    <img src={logout1} />
+                    <img alt="" src={logout1} />
                 </div>
                 <div className="profile_body_col">
                     <h2>Aswathy AB</h2>
@@ -49,5 +54,5 @@ export default function Profile() {
                 <label> 27 years and 9 months, 4'7"</label>
             </div>
         </div>
-    </>
+    </p>
 }

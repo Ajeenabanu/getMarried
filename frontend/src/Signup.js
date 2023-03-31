@@ -5,28 +5,31 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 export default function Signup() {
   const navi = useNavigate();
 
   const [dob, setdob] = useState();
-  const [denomination, setdenomination] = useState();
   const [mothertongue, setmothertongue] = useState();
   const [email, setemail] = useState();
+  const[sex,setsex]=useState()
 
   function register() {
-    var id=localStorage.getItem("userId")
-    axios.post("http://localhost:5000/updateProfile", {
-      dob: dob,
-      denomination: denomination,
-      mothertongue: mothertongue,
-      email: email,
-      userId:id
-    }).then(res => {
-      console.log(res);
-      console.log(res.data);
-    })
-
+    var id = localStorage.getItem("userId");
+    axios
+      .post("http://localhost:5000/updateProfile", {
+        dob: dob,
+        mothertongue: mothertongue,
+        email: email,
+        sex:sex,
+        userId: id,
+      })
+      .then((res) => {
+        console.log(res.data);
+        if(res.data === "updated succesfully") {
+          navi("/Search");
+        }
+      });
+      // navi("/Search");
   }
   return (
     <p>
@@ -36,7 +39,7 @@ export default function Signup() {
             <img alt="" src={img}></img>
           </div>
           <div className="home_row_left_label">
-            <h3>ChristianMatrimony.com</h3>
+            <h3>GetMarried.com</h3>
             <p>From Matrimony.com Group</p>
           </div>
         </div>
@@ -52,7 +55,7 @@ export default function Signup() {
         <div className="signup_row2">
           <div className="signup_row2_page1">
             <img alt="" src={imglogo}></img>
-            <label>Trusted by Christians across the world!</label>
+            <label>Trusted across the world!</label>
           </div>
           <form action="post" className="signup_row2_page2">
             <label>Please provide us with your basic details</label>
@@ -62,18 +65,10 @@ export default function Signup() {
                 onChange={(e) => {
                   setdob(e.target.value);
                 }}
-                type="text"
+                type="date"
               ></input>
             </div>
-            <div className="signup_row2_page2_line2">
-              <label>Denomination</label>
-              <input
-                onChange={(e) => {
-                  setdenomination(e.target.value);
-                }}
-              ></input>
-            </div>
-            <div className="signup_row2_page2_line2">
+            <div className="signup_row2_page2_line1">
               <label>Mother tongue</label>
               <input
                 onChange={(e) => {
@@ -90,9 +85,18 @@ export default function Signup() {
                 type="text"
               ></input>
             </div>
+            <div className="signup_row2_page2_line1">
+            <label>Looking for</label>
+            <input
+              onChange={(e) => {
+                setsex(e.target.value);
+              }}
+              type="text" placeholder="Sex"
+            ></input>
+          </div>
             <div className="signup_row2_page2_line3">
               <div className="">
-                <button onClick={register}>CONTINUE</button>
+                <button type="button" onClick={register}>CONTINUE</button>
               </div>
             </div>
           </form>

@@ -13,7 +13,6 @@
     background-color:rgb(255, 255, 255);
     position: fixed;
     width: 100%;
-
     top: 0;
 }
 .home_row1_left{
@@ -229,7 +228,7 @@ border: none;
  background-color: #f0f0f0;
  display: flex;
 flex-direction: column;
-height: 545px;
+height: 650px;
 padding-top: 150px;
 }
 .signup_row1 label span{
@@ -280,14 +279,8 @@ box-sizing: border-box;
     /* padding-left: 5%; */
     font-size: 1.1rem;
     width: 50%;}
-.signup_row2_page2_line1 input{
-    border: 0;
-    border-bottom: 1px solid #ddd;
-    height: 30px;
-    outline: none;
-    /* padding: 10px; */
 
-}
+
 .signup_row2_page2_line2{
     display: flex;
     flex-direction:row;
@@ -648,6 +641,7 @@ padding-bottom: 15px;
     padding-left: 50px;
     display: flex;
     flex-direction:row;
+    text-decoration: none;
 }
 .profile_body_div {
     width: 100%;
@@ -658,6 +652,7 @@ padding-bottom: 15px;
     border-radius: 10px;
     padding-bottom: 40px;
     padding-top: 20px;
+    margin-bottom: 50px;
 }
 .name2{
     
@@ -706,9 +701,10 @@ color: black;
 }
 #styling{
     font-size: large;
+    text-align: center;
 }
 #styleheading{
-    padding: 30px;
+padding: 20px;
 }
 .mainbody_head_1{
     width:45px;
@@ -728,4 +724,59 @@ margin-top: -30px;
 padding: 4px;
 border-radius: 8px;
 
+}
+.profile_body_co1_2 p{
+   padding-top: 5%;
+}
+.signup_row2_page2_line1_img{
+margin-bottom: 5%;
+margin-top: 2%;
+}
+
+
+.profile_body_3 img{
+    height: 300px;
+}
+.errorMsg{
+   color: red;
+   background-color: #f1b1b1;
+font-size: larger;
+padding: 1%;
+margin-top: 2%;
+font-weight: bolder;}
+.signup_row2_page2_line1 select{
+    margin-bottom: 2%;
+margin-top: 2%;
+padding-right: 5%;
+padding-top: 1%;
+padding-bottom: 1%;
+
+}
+.signup_row2_page2_line1 input{
+    border: 0;
+    border-bottom: 1px solid #ddd;
+    height: 30px;
+    outline: none;
+    /* padding: 10px; */
+
+}
+.signup_row2_page2_line1 textarea{
+    outline: none;
+    margin-bottom: 3%;
+
+}
+.profile_body_col h2{
+    margin-top: 10%;
+}
+.footer_row{
+    background-color: #000000;
+    color: white;
+    padding-left: 42%;
+}
+.copyright{
+    padding-top: 2%;
+}
+.footer_icon{
+    margin: 3%;
+   
 }

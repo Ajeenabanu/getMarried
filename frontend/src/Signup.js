@@ -4,6 +4,7 @@ import imglogo from "./image/logo.webp";
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Footers from "./Footers";
 
 export default function Signup() {
   const navi = useNavigate();
@@ -11,8 +12,18 @@ export default function Signup() {
   const [dob, setdob] = useState();
   const [mothertongue, setmothertongue] = useState();
   const [email, setemail] = useState();
-  const[sex,setsex]=useState()
+  const [sex, setsex] = useState();
+  const [about, setAbout] = useState();
+  const [image, setImage] = useState("");
 
+  // function handleImg(e){
+  //   setImage(e.target.files[0])
+  // }
+
+  const imgUpload = (e) => {
+    setImage(e.target.files[0].name);
+  };
+  // console.log(setImage);
   function register() {
     var id = localStorage.getItem("userId");
     axios
@@ -20,16 +31,17 @@ export default function Signup() {
         dob: dob,
         mothertongue: mothertongue,
         email: email,
-        sex:sex,
+        sex: sex,
         userId: id,
+        about: about,
+        image: image,
       })
       .then((res) => {
         console.log(res.data);
-        if(res.data === "updated succesfully") {
+        if (res.data === "updated succesfully") {
           navi("/Search");
         }
       });
-      // navi("/Search");
   }
   return (
     <p>
@@ -66,45 +78,87 @@ export default function Signup() {
                   setdob(e.target.value);
                 }}
                 type="date"
+                required
               ></input>
             </div>
             <div className="signup_row2_page2_line1">
               <label>Mother tongue</label>
-              <input
+              <select 
                 onChange={(e) => {
                   setmothertongue(e.target.value);
                 }}
-              ></input>
+                required>
+                <option>select</option>
+
+                <option value="Malayalam">Malayalam</option>
+                <option value="Tamil">Tamil</option>
+                <option value="Hindi">Hindi</option>
+                <option value="Arabic">Arabic</option>
+              </select>
             </div>
             <div className="signup_row2_page2_line1">
-              <label>Email id</label>
+              <label for="email">Email id</label>
               <input
                 onChange={(e) => {
                   setemail(e.target.value);
                 }}
-                type="text"
+                required
+                type="email"
+                placeholder="email"
+                name="email"
               ></input>
             </div>
             <div className="signup_row2_page2_line1">
-            <label>Looking for</label>
-            <input
+              <label>Gender</label>
+              <select
+                onChange={(e) => {
+                  setsex(e.target.value);
+                }}
+                required
+                type="text"
+                placeholder="Sex"
+              >
+              <option>select</option>
+              <option>Male</option>
+              <option>Female</option>
+              <option>General</option>
+              </select>
+            </div>
+            <div className="signup_row2_page2_line1">
+              <label>Profile picture</label>
+              <input
+                className="signup_row2_page2_line1_img"
+                onChange={imgUpload}
+                autoComplete="off"
+                type="file"
+                name="file"
+                required
+              ></input>
+            </div>
+            <div className="signup_row2_page2_line1">
+            <label>About You</label>
+            <textarea rows="10" cols="30"
               onChange={(e) => {
-                setsex(e.target.value);
+                setAbout(e.target.value);
               }}
-              type="text" placeholder="Sex"
-            ></input>
+              required
+              type="text"
+              placeholder="about"
+            ></textarea>
           </div>
+
             <div className="signup_row2_page2_line3">
               <div className="">
-                <button type="button" onClick={register}>CONTINUE</button>
+                <button type="button" onClick={register}>
+                  CONTINUE
+                </button>
               </div>
             </div>
           </form>
         </div>
-        <div className="signup_row3">
-          <label>Copyright © 2022. All rights reserved.</label>
-        </div>
+        
       </div>
+      <Footers/>
     </p>
   );
 }

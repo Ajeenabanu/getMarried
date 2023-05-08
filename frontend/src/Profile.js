@@ -1,20 +1,48 @@
 import "./style.css"
 import img from "./image/img.svg"
 import logout from "./image/logout.png"
-import logout1 from "./image/logout1.webp"
-import { useNavigate } from "react-router-dom";
+import { useNavigate ,useSearchParams} from "react-router-dom";
+import { useState,useEffect } from "react";
+import axios from "axios";
+import Footers from "./Footers";
+
 export default function Profile() {
-    const navi = useNavigate();
+    const location = useNavigate();
 
     function logoutin() {
         localStorage.clear();
-        navi("/");
+        location("/");
       }
+
+const [person, setPerson] = useState([]);
+const [SearchParams] = useSearchParams();
+
+const fetchData = async () => {
+    let id = SearchParams.get("id");
+
+    const res = await axios.get(
+      `http://localhost:5000/get-a-Profile/${id}`
+    );
+    setPerson(res.data.Person);
+    console.log(res.data.Person);
+
+  };
+function toHome(){
+    location("/")
+}
+function toSearch(){
+    location("/Search")
+}
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+
     return <p>
         <div className="profile_head">
             <img  alt="" src={img}></img>
-            <a href="/Home"> MY HOME </a>
-            <a href="/Search"> SEARCH </a>
+            <p onClick={toHome}> MY HOME </p>
+            <p onClick={toSearch}> SEARCH </p>
             <div className="profile_head_1">
                 <img  onClick={logoutin}  alt="" src={logout} />
                 <p className="tooltip">LogOut</p>
@@ -24,35 +52,28 @@ export default function Profile() {
         <div className="profile_body">
             <div className="profile_body_2">
                 <div className="profile_body_3">
-                    <img alt="" src={logout1} />
+                    <img className="imagedesign" alt="noimage" src={person.image} />
                 </div>
                 <div className="profile_body_col">
-                    <h2>Aswathy AB</h2>
-                    <label>E5939741 | Profile created by Self | Active - 1 week ago
-                        <span>Verified</span></label>
+                    <h2>{person.name}</h2>
+                    <br></br> 
                     <div className="profile_body_co1_1">
                         <div className="profile_body_co1_2">
-                            <ul>
-                                <li>27 years and 9 months, 4'7"</li>
-                                <li>Mother Tongue is Malayalam</li>
-                                <li>24 Manai Telugu Chettiyar</li>
-                            </ul>
-                        </div>
-                        <div className="profile_body_co1_3">
-                            <ul>
-                                <li>27 years and 9 months, 4'7"</li>
-                                <li>Mother Tongue is Malayalam</li>
-                                <li>24 Manai Telugu Chettiyar</li>
-                            </ul>
+                        <div> Full Name : {person.name} </div>
+                        <p>Email Id : {person.email}</p>
+                        <p>Date OF Birth : {person.dob}</p>
+                        <p>Mother tongue : {person.mothertongue}</p>
+                        <p>Mobile : {person.mobile}</p>
+                        <p>Sex : {person.sex}</p>
                         </div>
                     </div>
                 </div>
             </div>
             <div className="profile_body_div">
-                <h1>About Her</h1>
-                <label>I belong to a middle class family with moderate values</label>
-                <label> 27 years and 9 months, 4'7"</label>
+                <h1>About Me</h1>
+                <label>{person.about}</label>
             </div>
         </div>
+        <Footers/>
     </p>
 }

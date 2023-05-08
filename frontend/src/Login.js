@@ -2,6 +2,7 @@ import "./style.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import React, { useState } from "react";
+import Footers from "./Footers";
 
 export default function Login() {
   const navi = useNavigate();
@@ -41,14 +42,14 @@ export default function Login() {
           <div className="login_innerbody">
             <form action="POST" className="login_innerbody_1">
               <label>Mobile</label>
-              <input
+              <input required
                 onChange={(e) => {
                   setmobile(e.target.value);
                 }}
                 type="text"
               />
               <label>Password</label>
-              <input
+              <input required
                 onChange={(e) => {
                   setpassword(e.target.value);
                 }}
@@ -69,6 +70,7 @@ export default function Login() {
           </div>
         </div>
       </div>
+      <Footers/>
     </p>
   );
 }

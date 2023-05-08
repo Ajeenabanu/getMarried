@@ -9,6 +9,7 @@ import {
   Route,
 }
   from "react-router-dom";
+import PageNotFount from "./PageNotFount";
 
 export default function Navigation() {
   return <p>
@@ -19,6 +20,7 @@ export default function Navigation() {
         <Route path="/Login" element={<Login/>}></Route>
         <Route path="/Search" element={<Search/>}></Route>
         <Route path="/Profile" element={<Profile/>}></Route>
+        <Route path="*" element={<PageNotFount/>}></Route>
       </Routes>
     </BrowserRouter>
 

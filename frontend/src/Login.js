@@ -19,11 +19,11 @@ export default function Login() {
       .post("http://localhost:5000/login", {
         mobile: mobile,
         password: password,
-        userId:id
+        userId: id,
       })
       .then((res) => {
         console.log(res.data);
-        if(res.data.message === "login succesfully") {
+        if (res.data.message === "login succesfully") {
           navi("/Search");
         }
       });
@@ -42,14 +42,16 @@ export default function Login() {
           <div className="login_innerbody">
             <form action="POST" className="login_innerbody_1">
               <label>Mobile</label>
-              <input required
+              <input
+                required
                 onChange={(e) => {
                   setmobile(e.target.value);
                 }}
                 type="text"
               />
               <label>Password</label>
-              <input required
+              <input
+                required
                 onChange={(e) => {
                   setpassword(e.target.value);
                 }}
@@ -70,7 +72,7 @@ export default function Login() {
           </div>
         </div>
       </div>
-      <Footers/>
+      <Footers />
     </p>
   );
 }

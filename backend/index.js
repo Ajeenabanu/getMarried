@@ -1,9 +1,8 @@
 const express = require("express");
 const app = express();
 
-app.use(express.static('public'));
-app.use('/image', express.static('image'))
-
+app.use(express.static("public"));
+app.use("/image", express.static("image"));
 
 app.listen(5000, () => {
   console.log("listening port 5000");
@@ -15,12 +14,10 @@ app.use(cors());
 app.use(express.json());
 const model = require("./model");
 
-
-
 app.post("/userRegister", async (req, res) => {
   let user = model.User;
   let result = await user.create({
-    id:req.body.id,
+    id: req.body.id,
     name: req.body.uname,
     mobile: req.body.mobile,
     password: req.body.password,
@@ -41,12 +38,10 @@ app.post("/updateProfile", async (req, res) => {
       mothertongue: req.body.mothertongue,
       email: req.body.email,
       sex: req.body.sex,
-      about :req.body.about,
-      image:req.body.image
+      about: req.body.about,
+      image: req.body.image,
     }
-
   );
-  console.log(req.body.image);
   res.send("updated succesfully");
 });
 
@@ -87,43 +82,29 @@ app.get("/get-allProfiles", async (req, res) => {
   res.send(allProfiles);
 });
 
-
-const getAProfile=(id)=>{
+const getAProfile = (id) => {
   return model.User.findOne({
-    id
-  }).then((result)=>{
-    if(result){
-      return{
+    id,
+  }).then((result) => {
+    if (result) {
+      return {
         statusCode: 200,
-        Person:result
-      }
-    }
-    else{
+        Person: result,
+      };
+    } else {
       return {
         statusCode: 404,
         message: "no data is available",
       };
     }
-  })
-}
+  });
+};
 
-
-app.get('/get-a-Profile/:id',(req,res)=>{
-  getAProfile(req.params.id).then((result)=>{
-    var image="http://localhost:5000/image/"+result.Person.image
-    result.Person.image=image
+app.get("/get-a-Profile/:id", (req, res) => {
+  getAProfile(req.params.id).then((result) => {
+    var image = "http://localhost:5000/image/" + result.Person.image;
+    result.Person.image = image;
     console.log(image);
-    res.status(result.statusCode).json(result)
-  })
-})
-
-const multer = require('multer')
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, '/backend/image')
-  },
-  filename: function (req, file, cb) {
-    cb(null,  Date.now()+' '+file.originalname)
-  }
-})
-const upload = multer({ storage: storage})
+    res.status(result.statusCode).json(result);
+  });
+});

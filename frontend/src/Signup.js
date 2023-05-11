@@ -83,11 +83,12 @@ export default function Signup() {
             </div>
             <div className="signup_row2_page2_line1">
               <label>Mother tongue</label>
-              <select 
+              <select
                 onChange={(e) => {
                   setmothertongue(e.target.value);
                 }}
-                required>
+                required
+              >
                 <option>select</option>
 
                 <option value="Malayalam">Malayalam</option>
@@ -118,10 +119,10 @@ export default function Signup() {
                 type="text"
                 placeholder="Sex"
               >
-              <option>select</option>
-              <option>Male</option>
-              <option>Female</option>
-              <option>General</option>
+                <option>select</option>
+                <option>Male</option>
+                <option>Female</option>
+                <option>General</option>
               </select>
             </div>
             <div className="signup_row2_page2_line1">
@@ -136,16 +137,18 @@ export default function Signup() {
               ></input>
             </div>
             <div className="signup_row2_page2_line1">
-            <label>About You</label>
-            <textarea rows="10" cols="30"
-              onChange={(e) => {
-                setAbout(e.target.value);
-              }}
-              required
-              type="text"
-              placeholder="about"
-            ></textarea>
-          </div>
+              <label>About You</label>
+              <textarea
+                rows="10"
+                cols="30"
+                onChange={(e) => {
+                  setAbout(e.target.value);
+                }}
+                required
+                type="text"
+                placeholder="about"
+              ></textarea>
+            </div>
 
             <div className="signup_row2_page2_line3">
               <div className="">
@@ -156,9 +159,8 @@ export default function Signup() {
             </div>
           </form>
         </div>
-        
       </div>
-      <Footers/>
+      <Footers />
     </p>
   );
 }

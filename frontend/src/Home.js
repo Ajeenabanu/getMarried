@@ -2,40 +2,39 @@ import "./style.css";
 import img from "./image/img.svg";
 import img2 from "./image/img2.webp";
 import img3 from "./image/mrgimg.webp";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import uuid from "react-uuid";
-import Footers from "./Footers"
+import Footers from "./Footers";
+
 export default function Home() {
   const [id, setid] = useState();
   const [username, setname] = useState();
   const [usermobile, setmobile] = useState();
   const [userpassword, setpassword] = useState();
-  const [alert,setAlert]=useState(false);
+  const [alert, setAlert] = useState(false);
 
   const location = useNavigate();
   function userProfile() {
-    if(isNaN(usermobile)){
-      setAlert(true)
-    }
-    else{
-    axios
-      .post("http://localhost:5000/userRegister", {
-        id: id,
-        uname: username,
-        mobile: usermobile,
-        password: userpassword,
-      })
-      .then((res) => {
-        console.log(res);
-        console.log(res.data);
-        if (res.data.message === "registration successful") {
-          localStorage.setItem("userId", res.data.userId);
-          location("/Signup");
-        }
-      
-      });
+    if (isNaN(usermobile)) {
+      setAlert(true);
+    } else {
+      axios
+        .post("http://localhost:5000/userRegister", {
+          id: id,
+          uname: username,
+          mobile: usermobile,
+          password: userpassword,
+        })
+        .then((res) => {
+          console.log(res);
+          console.log(res.data);
+          if (res.data.message === "registration successful") {
+            localStorage.setItem("userId", res.data.userId);
+            location("/Signup");
+          }
+        });
     }
   }
   function Login() {
@@ -61,6 +60,9 @@ export default function Home() {
           <a id="navAbout" href="#about">
             About
           </a>
+          <a id="navAbout" href="#contact">
+            Contact
+          </a>
           <div className="home_row1_right_label">
             <label>Already a member?</label>
             <button onClick={Login}>Log In</button>
@@ -77,7 +79,6 @@ export default function Home() {
               <div className="home_row2_content_box2">
                 <label for="uname">Name</label>
                 <input
-                  
                   onChange={(e) => {
                     setname(e.target.value);
                   }}
@@ -91,7 +92,6 @@ export default function Home() {
               <div className="home_row2_content_box3">
                 <label for="umobile">mobile number</label>
                 <input
-                  
                   onChange={(e) => {
                     setmobile(e.target.value);
                   }}
@@ -128,7 +128,11 @@ export default function Home() {
                 <span>Terms & Conditions</span>and<span>Privacy Policy</span>
               </label>
             </div>
-            {alert===true? <div className="errorMsg">Please Enter Valid Data !!!</div>:""}
+            {alert === true ? (
+              <div className="errorMsg">Please Enter Valid Data !!!</div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>
@@ -221,7 +225,14 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <Footers/>
+      <div id="contact" className="contact">
+        <h1>CONTACT US</h1>
+        <div className="email">
+        <p onClick={() => window.location = 'mailto:getmarried@gmail.com'}>Email To : GetMarried@gmail.com</p>
+       <p> Phone NO : 7253649769</p>
+        </div>
+      </div>
+      <Footers />
     </p>
   );
 }

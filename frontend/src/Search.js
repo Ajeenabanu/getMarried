@@ -42,6 +42,7 @@ export default function Search() {
         <div className="mainbody_head_1">
           <img onClick={logoutin} alt="" src={logout} />
           <p>LogOut</p>
+          <input placeholder="search here" onChange={(e)=>setSearch(e.target.value)}></input>
         </div>
         </div>
 

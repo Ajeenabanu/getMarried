@@ -2,7 +2,7 @@ import "./style.css";
 import img from "./image/img.svg";
 import img2 from "./image/img2.webp";
 import img3 from "./image/mrgimg.webp";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import uuid from "react-uuid";
@@ -228,8 +228,10 @@ export default function Home() {
       <div id="contact" className="contact">
         <h1>CONTACT US</h1>
         <div className="email">
-        <p onClick={() => window.location = 'mailto:getmarried@gmail.com'}>Email To : GetMarried@gmail.com</p>
-       <p> Phone NO : 7253649769</p>
+          <p onClick={() => (window.location = "mailto:getmarried@gmail.com")}>
+            Email To : GetMarried@gmail.com
+          </p>
+          <p> Phone NO : 7253649769</p>
         </div>
       </div>
       <Footers />

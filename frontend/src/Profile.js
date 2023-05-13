@@ -1,7 +1,7 @@
 import "./style.css";
 import img from "./image/img.svg";
 import logout from "./image/logout.png";
-import { useNavigate, useSearchParams,Link } from "react-router-dom";
+import { useNavigate, useSearchParams} from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Footers from "./Footers";

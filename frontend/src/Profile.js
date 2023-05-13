@@ -17,13 +17,7 @@ export default function Profile() {
   const [person, setPerson] = useState([]);
   const [SearchParams] = useSearchParams();
 
-  const fetchData = async () => {
-    let id = SearchParams.get("id");
-
-    const res = await axios.get(`http://localhost:5000/get-a-Profile/${id}`);
-    setPerson(res.data.Person);
-    console.log(res.data.Person);
-  };
+  
   function toHome() {
     location("/");
   }
@@ -32,8 +26,15 @@ export default function Profile() {
   }
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    const fetchdata = async () => {
+      let id = SearchParams.get("id");
+  
+      const res = await axios.get(`http://localhost:5000/get-a-Profile/${id}`);
+      setPerson(res.data.Person);
+      console.log(res.data.Person);
+    };
+    fetchdata()
+  }, [SearchParams]);
 
   return (
     <p>
